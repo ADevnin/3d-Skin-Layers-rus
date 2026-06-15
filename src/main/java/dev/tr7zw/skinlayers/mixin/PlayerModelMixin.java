@@ -1,5 +1,6 @@
 package dev.tr7zw.skinlayers.mixin;
 
+import dev.tr7zw.transition.mc.*;
 import lombok.Setter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -99,9 +100,8 @@ public class PlayerModelMixin<T extends LivingEntity> extends HumanoidModel impl
         ((ModelPartInjector) (Object) rightSleeve).setInjectedMesh(null, null);
         ((ModelPartInjector) (Object) leftPants).setInjectedMesh(null, null);
         ((ModelPartInjector) (Object) rightPants).setInjectedMesh(null, null);
-        if (Minecraft.getInstance().player == null || abstractClientPlayer.distanceToSqr(Minecraft
-                .getInstance().gameRenderer.getMainCamera()
-                /*? >= 1.21.11 {*/ .position() /*?} else {*/ /*.getPosition() *//*?}*/) > SkinLayersModBase.config.renderDistanceLOD
+        if (Minecraft.getInstance().player == null || abstractClientPlayer.distanceToSqr(GeneralUtil.getCameraEntity()
+                /*? >= 1.21.11 {*/ .position() /*?} else {*/ /*.getPosition(0f) *//*?}*/) > SkinLayersModBase.config.renderDistanceLOD
                         * SkinLayersModBase.config.renderDistanceLOD) {
             return;
         }

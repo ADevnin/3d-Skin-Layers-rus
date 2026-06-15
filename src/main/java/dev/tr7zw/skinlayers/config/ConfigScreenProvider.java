@@ -7,7 +7,7 @@ import dev.tr7zw.skinlayers.SkinLayersModBase;
 import dev.tr7zw.skinlayers.SkullRendererCache;
 import dev.tr7zw.skinlayers.versionless.ModBase;
 import dev.tr7zw.skinlayers.versionless.config.Config;
-import dev.tr7zw.transition.mc.ComponentProvider;
+import dev.tr7zw.transition.mc.*;
 import dev.tr7zw.trender.gui.client.AbstractConfigScreen;
 import dev.tr7zw.trender.gui.client.BackgroundPainter;
 import dev.tr7zw.trender.gui.widget.WButton;
@@ -140,7 +140,7 @@ public class ConfigScreenProvider {
             WButton doneButton = new WButton(CommonComponents.GUI_DONE);
             doneButton.setOnClick(() -> {
                 save();
-                Minecraft.getInstance().setScreen(previous);
+                GeneralUtil.setScreen(previous);
             });
             root.add(doneButton, 0, 26, 6, 2);
 

@@ -4,6 +4,7 @@ import static dev.tr7zw.skinlayers.SkullRendererCache.itemCache;
 import static dev.tr7zw.skinlayers.SkullRendererCache.lastSkull;
 import static dev.tr7zw.skinlayers.SkullRendererCache.renderNext;
 
+import dev.tr7zw.transition.mc.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,11 +18,9 @@ import dev.tr7zw.skinlayers.SkinLayersModBase;
 import dev.tr7zw.skinlayers.SkinUtil;
 import dev.tr7zw.skinlayers.SkullRendererCache.ItemSettings;
 import dev.tr7zw.skinlayers.accessor.SkullSettings;
-import dev.tr7zw.transition.mc.PlayerUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,11 +52,11 @@ public class CustomHeadLayerMixin<T extends LivingEntity, M extends EntityModel 
     private void resolveSkullRenderType(
             net.minecraft.client.renderer.entity.state.LivingEntityRenderState livingEntityRenderState,
             net.minecraft.world.level.block.SkullBlock.Type type, CallbackInfoReturnable<RenderType> ci) {
-        if (Minecraft.getInstance().player != null && Minecraft.getInstance().gameRenderer.getMainCamera()
-                /*? >= 1.21.11 {*/ .position() /*?} else {*/ /*.getPosition() *//*?}*/
-                .distanceToSqr(livingEntityRenderState.x, livingEntityRenderState.y,
-                        livingEntityRenderState.z) > SkinLayersModBase.config.renderDistanceLOD
-                                * SkinLayersModBase.config.renderDistanceLOD) {
+        if (Minecraft.getInstance().player != null
+                && GeneralUtil.getCameraEntity()/*? >= 1.21.11 {*/ .position() /*?} else {*/ /*.getPosition(0f) *//*?}*/
+                        .distanceToSqr(livingEntityRenderState.x, livingEntityRenderState.y,
+                                livingEntityRenderState.z) > SkinLayersModBase.config.renderDistanceLOD
+                                        * SkinLayersModBase.config.renderDistanceLOD) {
             return; // too far away
         }
         if ((!livingEntityRenderState.headItem.isEmpty() || livingEntityRenderState.wornHeadType != null)

@@ -38,9 +38,7 @@ public class SkinUtil {
                 }
             }).build();
 
-    public static NativeImage getTexture(
-            Identifier resourceLocation,
-            SkullSettings settings) {
+    public static NativeImage getTexture(Identifier resourceLocation, SkullSettings settings) {
         if (resourceLocation == null) {
             return null;
         }
@@ -178,8 +176,7 @@ public class SkinUtil {
         return true;
     }
 
-    public static boolean setup3dLayers(Identifier playerSkin,
-            SkullSettings settings) {
+    public static boolean setup3dLayers(Identifier playerSkin, SkullSettings settings) {
         if (playerSkin == null) {
             return false; // no skin
         }

@@ -115,7 +115,10 @@ public class CustomizableModelPart extends CustomModelPart implements Mesh {
         try {
             compile(vanillaModel, poseStack.last(), vertexConsumer, light, overlay, color);
         } catch (IllegalStateException | IllegalArgumentException ex) {
-            throw new IllegalStateException("Crash in 3d Skin Layer function from overflow. https://github.com/tr7zw/3d-Skin-Layers/issues/280 PolgyonAmount=" + polygonAmount + " PolygonDataLength=" + polygonData.length, ex);
+            throw new IllegalStateException(
+                    "Crash in 3d Skin Layer function from overflow. https://github.com/tr7zw/3d-Skin-Layers/issues/280 PolgyonAmount="
+                            + polygonAmount + " PolygonDataLength=" + polygonData.length,
+                    ex);
         }
 
         //? if < 1.21.0 {

@@ -4,6 +4,7 @@ import static dev.tr7zw.skinlayers.SkullRendererCache.itemCache;
 import static dev.tr7zw.skinlayers.SkullRendererCache.lastSkull;
 import static dev.tr7zw.skinlayers.SkullRendererCache.renderNext;
 
+import dev.tr7zw.transition.mc.*;
 import org.spongepowered.asm.mixin.Mixin;
 
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,10 +27,8 @@ import dev.tr7zw.skinlayers.accessor.SkullModelAccessor;
 import dev.tr7zw.skinlayers.accessor.SkullModelStateAccessor;
 import dev.tr7zw.skinlayers.accessor.SkullSettings;
 import dev.tr7zw.skinlayers.api.Mesh;
-import dev.tr7zw.transition.mc.PlayerUtil;
 import dev.tr7zw.transition.mc.extending.ExtensionHolder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -66,8 +65,8 @@ public class SkullBlockEntityRendererMixin {
             net.minecraft.client.renderer.blockentity.state.SkullBlockRenderState skullBlockRenderState, float f,
             Vec3 vec3, net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay crumblingOverlay,
             CallbackInfo ci) {
-        Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera()
-                /*? >= 1.21.11 {*/ .position() /*?} else {*/ /*.getPosition() *//*?}*/;
+        Vec3 camera = GeneralUtil.getCameraEntity()
+                /*? >= 1.21.11 {*/ .position() /*?} else {*/ /*.getPosition(0f) *//*?}*/;
         if (!SkinLayersModBase.config.enableSkulls)
             return;
         if (internalDistToCenterSqr(skullBlockEntity.getBlockPos(), (int) camera.x(), (int) camera.y(),
